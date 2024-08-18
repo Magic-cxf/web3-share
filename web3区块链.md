@@ -40,6 +40,14 @@
 - 什么是DApps:去中心化应用的特点
 - DApps的技术栈：区块链平台、智能合约
 
+
+
+### 4.比特币
+
+#### 4.1比特币如何诞生的
+
+
+
 > https://medium.com/@nanyouquan/web3-0%E4%B8%8E%E4%B8%AD%E5%9B%BD%E6%97%A0%E5%85%B3-95b052cf869c
 
 > https://www2.deloitte.com/content/dam/Deloitte/cn/Documents/technology-media-telecommunications/deloitte-cn-tmt-web3-mode-zh-230303.pdf
@@ -49,3 +57,16 @@
 > https://www.datawallet.com/zh/ethereum-gas-price  以太坊gas价格
 
 > https://liaoxuefeng.com/books/blockchain/introduction/index.html 廖雪峰区块链教程
+
+> https://binschool.app/bcalg/bcalg-pow-mine.html pow挖矿算法
+
+> https://explorer.btc.com/zh-CN/btc  区块相关信息
+
+> https://explorer.btc.com/zh-CN/btc/blocks  每一个区块的信息
+
+
+
+
+
+**NVIDIA A100 40GB**显卡 挖矿性能 171MH/s      1.71亿次每秒的哈希计算性能    1EH/s是一万亿次每秒 
+
