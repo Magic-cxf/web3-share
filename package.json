@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Magic-cxf/web3-share#readme",
   "dependencies": {
-    "big-integer": "^1.6.52"
+    "big-integer": "^1.6.52",
+    "crypto": "^1.0.1"
   }
 }

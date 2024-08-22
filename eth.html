@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contract Interaction</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+</head>
+<body>
+    <h1>Interact with Smart Contract</h1>
+    <div>
+        <h2>Set Value</h2>
+        <input type="text" id="setValueInput" placeholder="Enter value">
+        <button id="setValueButton">Set Value</button>
+    </div>
+
+    <div>
+        <h2>Get Value</h2>
+        <button id="getValueButton">Get Value</button>
+        <p id="valueOutput">Value will appear here</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            // 以太坊网络配置
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            console.log(provider);
+            const signer = provider.getSigner();
+
+            // 合约信息
+            const contractAddress = "0xBB6364e02d423c18f59626055b5297c2F102c521";  // 替换为你的合约地址
+            const contractABI = [
+                    {
+                        "inputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "x",
+                                "type": "uint256"
+                            }
+                        ],
+                        "name": "set",
+                        "outputs": [],
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "get",
+                        "outputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "storedData",
+                        "outputs": [
+                            {
+                                "internalType": "uint256",
+                                "name": "",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "view",
+                        "type": "function"
+                    }];
+
+            // 创建合约实例
+            const contractWithProvider = new ethers.Contract(contractAddress, contractABI, provider);
+            const contractWithSigner = new ethers.Contract(contractAddress, contractABI, signer);
+
+            // 获取合约的 "Set Value" 和 "Get Value" 按钮
+            const setValueButton = document.getElementById("setValueButton");
+            const getValueButton = document.getElementById("getValueButton");
+
+            // 获取合约的输入字段和输出字段
+            const setValueInput = document.getElementById("setValueInput");
+            const valueOutput = document.getElementById("valueOutput");
+
+            // 设置值
+            setValueButton.addEventListener("click", async () => {
+                const value =parseInt(setValueInput.value);
+                try {
+                    const tx = await contractWithSigner.set(value);
+                    await tx.wait(); // 等待交易被挖矿
+                    alert("Value set successfully!");
+                } catch (error) {
+                    console.error(error);
+                    alert("Failed to set value");
+                }
+            });
+
+            // 获取值
+            getValueButton.addEventListener("click", async () => {
+                try {
+                    console.log('合约', contractWithProvider);
+                    const value = await contractWithProvider.get();
+                    valueOutput.textContent = `Current value: ${value}`;
+                } catch (error) {
+                    console.error(error);
+                    valueOutput.textContent = "Failed to get value";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
